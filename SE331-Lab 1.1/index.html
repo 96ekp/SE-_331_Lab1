@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Intro SE331</title>
+
+    <!-- Import Styles -->
+    <link rel="stylesheet" href="./assets/styles.css" />
+
+    <!-- Import Vue.js -->
+    <script src="https://unpkg.com/vue@3.2.20/dist/vue.global.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <div class="nav-bar"></div>
+      <div class="cart">
+        Cart
+        <ul>
+          <li v-for="detail in cart">{{ detail }}</li>
+          <li v-for="detail in cart2">{{ detail }}</li>
+        </ul>
+      </div>
+
+      <product-display
+        :premium="premium"
+        @add-to-cart="updateCart"
+        @clear-cart="clearCart"
+        @clear-all-cart="clearAllCart"
+      ></product-display>
+    </div>
+
+    <!-- Import Js -->
+    <script src="./main.js"></script>
+
+    <!-- Import Components -->
+    <script src="./components/ProductDisplay.js"></script>
+    <script src="./components/ReviewList.js"></script>
+
+    <script>
+      const mountedApp = app.mount("#app");
+    </script>
+  </body>
+</html>
