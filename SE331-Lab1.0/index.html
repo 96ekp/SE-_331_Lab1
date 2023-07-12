@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Intro SE331</title>
+<!-- Import Styles -->
+<link rel="stylesheet" href="./assets/styles.css" />
+<!-- Import Vue.js -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+
+<!-- Import Vue.js -->
+<script src="https://unpkg.com/vue@3"></script>
+</head>
+
+<body>
+<div id="app">
+
+
+<!-- Question 1 -->
+<!-- Add the product description and display the image -->
+<div class="nav-bar"></div>
+<div class="cart">Cart ({{ cart }})</div>
+<div class="product-display">
+<div class="product-container">
+<div class="product-image">
+<!-- image goes here for long hand -->
+<!-- <img v-bind:src="image" /> -->
+
+<!-- image goes here for short hand -->
+<!-- <img :src="image" /> -->
+
+<!-- Question: 6 -->
+<!-- Bind the out-of-stock-image -->
+<img :src="image" :class="{ 'out-of-stock-image': !inStock }" />
+</div>
+</div>
+</div>
+
+<div class="product-info">
+<!-- <h1>{{product}}</h1> -->
+<!-- <h1>{{brand + ' ' + product}}</h1> -->
+
+<!-- map with the computation property -->
+<h1>{{ title }}</h1>
+
+<!-- Question: 5 -->
+<!-- By clicking the "Toggle Stock Status" button, the toggleStockStatus method will be invoked, and it will toggle the value of inStock. The stock status message will change. -->
+<p v-if="inStock">In Stock</p>
+<p v-else>Out of Stock</p>
+
+<!-- option to display description -->
+<h1>{{description}}</h1>
+
+<!-- Question: 2 -->
+<!-- Add a link to the product name that leads to www.camt.cmu.ac.th -->
+<h1>
+<a v-bind:href="'https://www.camt.cmu.ac.th'">{{product}}</a>
+</h1>
+
+<!-- if-else statement condition with "inStock" variable -->
+<!-- <p v-if="inStock">In Stock</p>
+<p v-else>Out of Stock</p> -->
+
+<!-- if-else-else statement condition with "inventory" variable -->
+<p v-if="inventory > 10">In Stock</p>
+<p v-else-if="inventory <= 10 && inventory > 0">Almost out of Stock</p>
+<p v-else>Out of Stock</p>
+
+<!-- Question: 3 -->
+<!-- Add onSale attribute -->
+<!-- <p v-if="onSale"> Is On Sale</p>
+<p v-else>Sold out </p> -->
+
+
+<!-- Question: 7 -->
+<!-- This property will display "SE 331 Boots is on sale". Otherwise, it will display an empty string. -->
+<h1 v-if="onSale">{{ saleMessage }}</h1>
+<h1 v-else>Sold out</h1>
+
+<ul>
+<li v-for="detail in details">{{detail}}</li>
+</ul>
+
+<!-- a v-for directive is used to iterate over each variant in the variants array. -->
+<!-- <div v-for="variant in variants" :key="variant.id">
+{{ variant.color }}
+</div> -->
+
+<!-- event binding to each color name, and when the mouse is moved over a color -->
+<!-- <div v-for="variant in variants" :key="variant.id">
+<span @mouseover="updateImage(variant.image)"
+>{{ variant.color }}</span
+>
+</div> -->
+
+<!-- file to bind the variant.color as the class for the color circle:-->
+
+<!-- <div
+v-for="variant in variants"
+:key="variant.id"
+@mouseover="updateImage(variant.image)"
+class="color-circle"
+:class="variant.color"
+></div> -->
+
+<!-- Updating the event when the mouse is over the color button -->
+<div
+v-for="(variant, index) in variants"
+:key="variant.id"
+@mouseover="updateVariant(index)"
+class="color-circle"
+:style="{ backgroundColor: variant.color }"
+>
+{{ variant.color }}
+</div>
+
+<!-- Question: 4 -->
+<!-- Show the size of the socks in a single line -->
+<p>Sizes: {{ sizes.join(', ') }}</p>
+
+<!-- Add button to display the cart value and bind the click event -->
+<!-- Shorthand " @click " and long hand "v-on:click" -->
+<!-- <button class="button" @click="addToCart">Add To Cart</button> -->
+
+<!-- Bind a boolean value to a CSS attribute to control its activation -->
+<!-- <button class="button" :disabled="!inStock" @click="addToCart">
+Add To Cart
+</button> -->
+
+<!-- Test disable button when products are out of stock -->
+<button
+class="button"
+:disabled="!inStock"
+@click="addToCart"
+:class="{ disabledButton: !inStock }"
+>
+Add To Cart
+</button>
+
+<!-- Question: 5 -->
+<!-- Add button -->
+<button class="button" @click="toggleStockStatus">
+Toggle Stock Status
+</button>
+</div>
+</div>
+
+
+</div>
+
+
+<!-- Import Js -->
+<script src="./main.js"></script>
+
+<!-- Import ProductDisplay component -->
+<script src="./components/ProductDisplay.js"></script>
+
+
+</body>
+</html>
+
